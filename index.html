@@ -265,9 +265,104 @@
   .toast.show { opacity: 1; transform: translate(-50%, 0); }
   .toast b { color: var(--gold); font-weight: 500; }
 
+
+  /* ================= 실제 / 가상 구분 표시 ================= */
+  .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; letter-spacing: .1em; padding: 3px 10px; border-radius: 20px; white-space: nowrap; font-weight: 400; vertical-align: middle; }
+  .chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; }
+  .chip.real { background: rgba(31,95,116,.1); color: #1f5f74; }
+  .chip.real::before { background: #1f5f74; }
+  .chip.demo { background: rgba(201,162,93,.14); color: #8a6a2e; }
+  .chip.demo::before { border: 1px solid #b38b47; background: transparent; }
+  .dark .chip.real { background: rgba(142,197,214,.15); color: #a9d4e2; }
+  .dark .chip.real::before { background: #a9d4e2; }
+  .dark .chip.demo { color: var(--gold); }
+  .legend { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 18px 0; display: flex; gap: 34px; flex-wrap: wrap; align-items: center; font-size: 13px; color: var(--muted); }
+  .legend b { font-weight: 500; color: var(--navy); margin-right: 4px; }
+
+  /* ================= 브랜드 소개 ================= */
+  .brand-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 90px; align-items: start; }
+  .brand-lead { font-weight: 200; font-size: clamp(26px, 2.6vw, 34px); line-height: 1.6; color: var(--navy); }
+  .brand-lead b { font-weight: 600; }
+  .brand-lead + p { margin-top: 24px; color: var(--muted); font-size: 15px; }
+  .pillars { border-top: 1px solid var(--navy); }
+  .pillar { display: grid; grid-template-columns: 150px 1fr; gap: 20px; padding: 26px 0; border-bottom: 1px solid var(--line); }
+  .pillar .en { font-style: italic; font-size: 22px; color: var(--gold); line-height: 1.3; }
+  .pillar h3 { font-weight: 500; font-size: 17px; color: var(--navy); }
+  .pillar p { font-size: 14.5px; color: var(--muted); margin-top: 4px; }
+
+  /* ================= 햄버거 메뉴 ================= */
+  .burger { display: none; width: 40px; height: 40px; background: none; border: none; cursor: pointer; position: relative; }
+  .burger i { position: absolute; left: 10px; right: 10px; height: 1px; background: var(--navy); transition: transform .35s var(--ease), opacity .3s; }
+  .burger i:nth-child(1) { top: 14px; } .burger i:nth-child(2) { top: 20px; } .burger i:nth-child(3) { top: 26px; }
+  .drawer { position: fixed; inset: 0; z-index: 150; pointer-events: none; }
+  .drawer .dim { position: absolute; inset: 0; background: rgba(6,17,27,.5); opacity: 0; transition: opacity .4s var(--ease); }
+  .drawer .panel { position: absolute; top: 0; right: 0; bottom: 0; width: min(86vw, 360px); background: var(--sand); transform: translateX(100%); transition: transform .45s var(--ease); display: flex; flex-direction: column; padding: 22px 28px 34px; overflow-y: auto; }
+  .drawer.open { pointer-events: auto; }
+  .drawer.open .dim { opacity: 1; }
+  .drawer.open .panel { transform: none; }
+  .drawer .dhead { display: flex; justify-content: space-between; align-items: center; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+  .drawer .dhead .logo { font-size: 18px; letter-spacing: .3em; }
+  .drawer .close { background: none; border: none; font-size: 30px; font-weight: 200; color: var(--navy); cursor: pointer; line-height: 1; }
+  .drawer .dlabel { font-family: var(--en); font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin: 26px 0 6px; }
+  .drawer a, .drawer .dbtn { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 16px; color: var(--navy); background: none; border-left: none; border-right: none; border-top: none; width: 100%; text-align: left; cursor: pointer; font-family: var(--ko); font-weight: 300; }
+  .drawer a span, .drawer .dbtn span { font-family: var(--en); color: var(--gold); }
+
+  /* ================= 상세 패널 (기사 · 상품 · 예약 · 장바구니) ================= */
+  .sheet { position: fixed; inset: 0; z-index: 180; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(6,17,27,.6); backdrop-filter: blur(6px); opacity: 0; pointer-events: none; transition: opacity .4s var(--ease); }
+  .sheet.open { opacity: 1; pointer-events: auto; }
+  .sheet-box { background: var(--sand); width: 100%; max-width: 760px; max-height: 88vh; overflow-y: auto; position: relative; transform: translateY(16px); transition: transform .5s var(--ease); border-top: 2px solid var(--gold); }
+  .sheet.open .sheet-box { transform: none; }
+  .sheet-x { position: sticky; top: 0; float: right; margin: 10px 12px 0 0; background: rgba(247,244,239,.9); border: none; font-size: 28px; font-weight: 200; color: var(--navy); cursor: pointer; width: 40px; height: 40px; z-index: 3; }
+  .sheet-hero { height: 280px; margin-top: -50px; }
+  .sheet-body { padding: 40px 48px 46px; }
+  .sheet-body .k { font-family: var(--en); font-style: italic; font-size: 19px; color: var(--gold); }
+  .sheet-body h3 { font-weight: 400; font-size: 28px; line-height: 1.45; color: var(--navy); margin: 8px 0 18px; }
+  .sheet-body h4 { font-weight: 500; font-size: 15px; color: var(--navy); margin: 26px 0 8px; letter-spacing: .04em; }
+  .sheet-body p { font-size: 15px; color: #4a5560; }
+  .info { margin-top: 22px; border-top: 1px solid var(--navy); }
+  .info div { display: grid; grid-template-columns: 120px 1fr; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .info dt, .info .t { color: var(--muted); }
+  .src { font-size: 12px; color: var(--muted); margin-top: 14px; }
+  .sheet-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 30px; }
+
+  .steps { display: flex; gap: 0; margin-bottom: 30px; border-bottom: 1px solid var(--line); }
+  .steps span { flex: 1; padding: 10px 0; font-size: 12.5px; letter-spacing: .08em; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; }
+  .steps span.on { color: var(--navy); border-color: var(--gold); font-weight: 500; }
+  .steps span.done { color: var(--gold); }
+  .fgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 24px; }
+  .f { display: flex; flex-direction: column; gap: 6px; }
+  .f.full { grid-column: 1 / -1; }
+  .f label { font-size: 13px; color: var(--navy); font-weight: 500; }
+  .f input[type=text], .f input[type=tel] { border: none; border-bottom: 1px solid rgba(10,25,38,.3); background: transparent; padding: 10px 0; font-family: var(--ko); font-size: 15px; color: var(--navy); outline: none; }
+  .f input:focus { border-color: var(--gold); }
+  .f .err { font-size: 12.5px; color: #b0473a; min-height: 1.2em; }
+  .check { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: #4a5560; cursor: pointer; }
+  .check input { margin-top: 5px; accent-color: var(--navy); }
+  .notice-box { background: rgba(201,162,93,.12); border-left: 2px solid var(--gold); padding: 14px 18px; font-size: 13.5px; color: #6b5427; margin-top: 22px; }
+
+  .stepper { display: inline-flex; align-items: center; border: 1px solid var(--line); }
+  .stepper button { width: 36px; height: 36px; border: none; background: none; font-size: 17px; cursor: pointer; color: var(--navy); }
+  .stepper button:hover { background: var(--sand2); }
+  .stepper span { min-width: 34px; text-align: center; font-family: var(--en); font-size: 19px; }
+  .cart-row { display: grid; grid-template-columns: 1fr auto auto auto; gap: 18px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .cart-row .nm { font-size: 15px; color: var(--navy); }
+  .cart-row .nm small { display: block; font-size: 12.5px; color: var(--muted); }
+  .cart-row .sum { font-family: var(--en); font-size: 20px; min-width: 90px; text-align: right; }
+  .cart-row .del { background: none; border: none; color: var(--muted); font-size: 12.5px; cursor: pointer; text-decoration: underline; }
+  .cart-total { display: flex; justify-content: space-between; padding: 20px 0 0; font-size: 16px; color: var(--navy); }
+  .cart-total b { font-family: var(--en); font-size: 28px; font-weight: 500; }
+  .empty { padding: 30px 0; text-align: center; color: var(--muted); }
+  .item .more-btn { background: none; border: none; padding: 0; margin-top: 6px; font-size: 13px; color: var(--navy); border-bottom: 1px solid var(--gold); cursor: pointer; font-family: var(--ko); }
+  .item .visual { cursor: pointer; }
+  .feature-list li a { display: contents; }
+  .feature-list li a:hover { color: var(--gold); }
+
   /* ================= 모바일 ================= */
   @media (max-width: 1080px) {
     nav { display: none; }
+    .burger { display: inline-block; }
+    .tb-right .hide-m { display: none; }
+    .brand-grid { grid-template-columns: 1fr; gap: 48px; }
     .tb { grid-template-columns: auto 1fr; }
     .tb .logo { order: -1; }
     .cover, .feature, .news .wrap { grid-template-columns: 1fr; }
@@ -302,6 +397,15 @@
     .booking { grid-template-columns: 1fr; }
     .booking .btn { grid-column: auto; }
     .ft { grid-template-columns: 1fr; }
+    .pillar { grid-template-columns: 1fr; gap: 4px; }
+    .sheet { padding: 0; align-items: flex-end; }
+    .sheet-box { max-height: 92vh; }
+    .sheet-body { padding: 32px 24px 36px; }
+    .sheet-hero { height: 200px; }
+    .fgrid { grid-template-columns: 1fr; }
+    .info div { grid-template-columns: 96px 1fr; }
+    .cart-row { grid-template-columns: 1fr auto; }
+    .legend { gap: 12px; flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
@@ -313,6 +417,7 @@
 <header class="topbar">
   <div class="tb">
     <nav>
+      <a href="#about">브랜드</a>
       <a href="#magazine">매거진</a>
       <a href="#pass">로컬 패스</a>
       <a href="#shop">숍</a>
@@ -320,9 +425,10 @@
     </nav>
     <a class="logo" href="#top">WAVE<i>Local</i></a>
     <div class="tb-right">
-      <button class="demo" data-title="로그인">로그인</button>
-      <button class="demo hide-s" data-title="마이페이지">마이페이지</button>
-      <button class="cart" id="cartBtn" data-title="장바구니">장바구니 <b id="cartN">0</b></button>
+      <button class="demo hide-m" data-title="로그인">로그인</button>
+      <button class="demo hide-m" data-title="마이페이지">마이페이지</button>
+      <button class="cart" id="cartBtn">장바구니 <b id="cartN">0</b></button>
+      <button class="burger" id="burger" aria-label="메뉴 열기" aria-expanded="false"><i></i><i></i><i></i></button>
     </div>
   </div>
 </header>
@@ -353,6 +459,10 @@
         </div>
       </div>
     </div>
+    <div class="legend reveal" style="margin-top:34px">
+      <span><span class="chip real">실제 관광 정보</span>&nbsp; 경포해변 · 안목해변 커피거리 · 선교장의 주소와 운영 정보 (한국관광공사 등 공개 정보 기준)</span>
+      <span><span class="chip demo">가상 · 예시</span>&nbsp; 웨이브 로컬 · 스테이 소담 · 패스와 숍 상품 · 가격 · 수량 · 기사 속 일정</span>
+    </div>
   </div>
 </section>
 
@@ -373,11 +483,12 @@
       <div class="feature-text reveal">
         <div class="k">Editor's Course</div>
         <h3>소나무 숲, 바다 카페,<br><b>300년 고택</b>까지 1박 2일</h3>
+        <p style="margin-bottom:10px"><span class="chip real">실제 관광지</span> <span class="chip demo">숙소 · 일정은 예시</span></p>
         <p>에디터가 직접 짠 강릉 커플 코스예요. 오션뷰 부티크 호텔 스테이 소담에서 머물며 천천히 걸어 보세요.</p>
         <ul class="feature-list">
-          <li><span>01</span>경포해변</li>
-          <li><span>02</span>안목해변 커피거리</li>
-          <li><span>03</span>선교장</li>
+          <li><a href="tour.html#course"><span>01</span>경포해변 · 강릉시 창해로 514</a></li>
+          <li><a href="tour.html#course"><span>02</span>안목해변 커피거리 · 강릉시 창해로14번길 20-1</a></li>
+          <li><a href="tour.html#course"><span>03</span>선교장 · 강릉시 운정길 63</a></li>
         </ul>
         <div class="feature-btns">
           <a class="btn gold" href="tour.html">이달의 추천 강릉 코스 보기 <span class="arr">→</span></a>
@@ -394,7 +505,7 @@
     <div class="sec-head reveal">
       <div class="no">02</div>
       <div><div class="k">The Magazine</div><h2>이번 호 <b>로컬 스토리</b></h2></div>
-      <div class="side">여행지 · 숨은 카페 · 감성 소품숍<br>※ 기사 내용은 과제용 예시</div>
+      <div class="side">여행지 · 숨은 카페 · 감성 소품숍<br>※ 기사 속 장소 정보는 실제, 글은 과제용 예시</div>
     </div>
     <div class="stories">
       <a class="story big reveal" href="tour.html">
@@ -404,17 +515,19 @@
         <p>경포부터 안목까지, 바다를 끼고 걷기 좋은 길을 에디터가 직접 걸어 봤어요.</p>
         <span class="more">Read the course →</span>
       </a>
-      <a class="story reveal" href="#magazine" onclick="return false">
+      <a class="story reveal" href="#article-cafe" data-article="cafe">
         <div class="pic"><div class="photo" style="--img:url('https://images.unsplash.com/photo-1760175445000-0e01e193d1cd?w=900&q=80&auto=format&fit=crop'), url('images/room-ocean.jpg'); --pos:center"></div></div>
         <div class="meta"><span class="c">Café</span><span>5 min read</span></div>
-        <h3>창밖이 전부 바다인<br>숨은 카페 다섯 곳</h3>
-        <p>간판보다 창이 먼저 보이는 동네 카페들 (예시 기사).</p>
+        <h3>창밖이 전부 바다인<br>안목 커피거리 산책</h3>
+        <p>바다를 마주한 카페들이 모인 거리를 천천히 걷는 법.</p>
+        <span class="more">Read the story →</span>
       </a>
-      <a class="story reveal" href="#magazine" onclick="return false">
+      <a class="story reveal" href="#article-seongyojang" data-article="seongyojang">
         <div class="pic"><div class="photo" style="--img:url('https://images.unsplash.com/photo-1704619193133-5bc3b739c7d4?w=900&q=80&auto=format&fit=crop'), url('images/seongyojang.jpg'); --pos:65% center"></div></div>
         <div class="meta"><span class="c">Heritage</span><span>6 min read</span></div>
         <h3>300년 고택에서<br>배우는 느린 시간</h3>
         <p>연못 위 정자 활래정이 있는 선교장 산책 노트.</p>
+        <span class="more">Read the story →</span>
       </a>
       <a class="story story-wide reveal" href="#shop">
         <div class="pic"><div class="photo" style="--img:url('https://images.unsplash.com/photo-1698096829153-35228f9d752b?w=1200&q=80&auto=format&fit=crop'), url('images/room-classic.jpg'); --pos:center"></div></div>
@@ -435,14 +548,14 @@
     <div class="sec-head reveal">
       <div class="no">03</div>
       <div><div class="k">Signature Local Pass</div><h2>한 장으로 떠나는 <b>로컬 투어 티켓</b></h2></div>
-      <div class="side">카드를 눌러 패스를 고르고<br>날짜와 수량을 선택하세요 <span class="demo-tag">예시 가격</span></div>
+      <div class="side">카드를 눌러 패스를 고르고<br>날짜와 수량을 선택하세요 <span class="chip demo">가상 상품 · 예시 가격</span></div>
     </div>
     <div class="passes">
       <div class="pass reveal sel" data-name="강릉 원데이 패스" data-price="29000">
         <div class="top"><div class="photo" style="--img:url('https://images.unsplash.com/photo-1644373653266-edcc0e58cc4c?w=900&q=80&auto=format&fit=crop'), url('images/gyeongpo-pine.jpg'); --pos:center 70%"></div><div class="lbl">One-Day Pass</div><div class="badge">BEST</div></div>
         <div class="body">
           <h3>강릉 원데이 패스</h3>
-          <ul><li>해변 · 고택 · 시장 투어 3곳</li><li>로컬 가이드 워킹 투어 2시간</li><li>제휴 카페 음료 1잔</li></ul>
+          <ul><li>경포해변 · 선교장 · 안목해변 코스</li><li>로컬 가이드 워킹 투어 2시간</li><li>제휴 카페 음료 1잔</li></ul>
           <div class="price"><b class="num">29,000</b><small>원 / 1인 (예시)</small></div>
           <div class="left">잔여 12매 (예시)</div>
         </div>
@@ -470,9 +583,9 @@
     <div class="booking reveal">
       <div class="bk"><label>Pass</label><div class="v" id="bkName">강릉 원데이 패스</div></div>
       <div class="bk"><label>Date</label><input type="date" id="bkDate"></div>
-      <div class="bk"><label>Qty</label><div class="qty"><button id="minus" aria-label="수량 빼기">−</button><span id="qtyN">2</span><button id="plus" aria-label="수량 더하기">+</button></div></div>
+      <div class="bk"><label>Qty · <span id="qtyUnit">인원</span></label><div class="qty"><button id="minus" aria-label="수량 빼기">−</button><span id="qtyN">2</span><button id="plus" aria-label="수량 더하기">+</button></div></div>
       <div class="bk"><label>Total · 예시</label><div class="total num" id="bkTotal">58,000원</div></div>
-      <button class="btn gold" id="payBtn">결제하기 →</button>
+      <button class="btn gold" id="payBtn">예약하기 →</button>
     </div>
   </div>
 </section>
@@ -483,28 +596,54 @@
     <div class="sec-head reveal">
       <div class="no">04</div>
       <div><div class="k">Wave Local Shop</div><h2>프리미엄 가이드북 &amp; <b>로컬 굿즈</b></h2></div>
-      <div class="side">상품 그림은 과제용 목업이에요<br><span class="demo-tag">예시 가격</span></div>
+      <div class="side">상품을 누르면 상세 정보를 볼 수 있어요<br><span class="chip demo">가상 상품 · 목업 이미지</span></div>
     </div>
     <div class="shop">
       <div class="item reveal">
-        <div class="visual"><span class="tag">NEW</span><div class="book"><div class="bt">WAVE LOCAL</div><div><div class="bh">Gangneung<br>Guide</div><div class="bl" style="margin-top:12px"></div></div><div class="bs">ISSUE 07 · PREMIUM</div></div></div>
+        <div class="visual" data-product="guide"><span class="tag">NEW</span><div class="book"><div class="bt">WAVE LOCAL</div><div><div class="bh">Gangneung<br>Guide</div><div class="bl" style="margin-top:12px"></div></div><div class="bs">ISSUE 07 · PREMIUM</div></div></div>
         <h3>프리미엄 가이드북 : 강릉</h3><p>에디터 추천 코스 · 지도 · 카페 리스트</p>
-        <div class="row"><b class="num">18,000<small>원 (예시)</small></b><button class="add" data-name="프리미엄 가이드북">담기</button></div>
+        <div class="row"><b class="num">18,000<small>원 (예시)</small></b><button class="add" data-id="guide">담기</button></div>
+        <button class="more-btn" data-product="guide">상세 정보 보기</button>
       </div>
       <div class="item reveal">
-        <div class="visual"><div class="bag"><span>WAVE<br>LOCAL</span></div></div>
+        <div class="visual" data-product="bag"><div class="bag"><span>WAVE<br>LOCAL</span></div></div>
         <h3>오션 캔버스 에코백</h3><p>두꺼운 캔버스, 데일리 사이즈</p>
-        <div class="row"><b class="num">24,000<small>원 (예시)</small></b><button class="add" data-name="오션 캔버스 에코백">담기</button></div>
+        <div class="row"><b class="num">24,000<small>원 (예시)</small></b><button class="add" data-id="bag">담기</button></div>
+        <button class="more-btn" data-product="bag">상세 정보 보기</button>
       </div>
       <div class="item reveal">
-        <div class="visual"><div class="cards-set"><i></i><i></i><i>Gangneung</i></div></div>
+        <div class="visual" data-product="card"><div class="cards-set"><i></i><i></i><i>Gangneung</i></div></div>
         <h3>강릉 엽서 세트 (6종)</h3><p>바다 · 소나무 · 고택 일러스트</p>
-        <div class="row"><b class="num">9,000<small>원 (예시)</small></b><button class="add" data-name="강릉 엽서 세트">담기</button></div>
+        <div class="row"><b class="num">9,000<small>원 (예시)</small></b><button class="add" data-id="card">담기</button></div>
+        <button class="more-btn" data-product="card">상세 정보 보기</button>
       </div>
       <div class="item reveal">
-        <div class="visual"><div class="drip"><b>ANMOK</b><i>Drip Bag</i><small>OCEAN BLEND · 10P</small></div></div>
+        <div class="visual" data-product="drip"><div class="drip"><b>ANMOK</b><i>Drip Bag</i><small>OCEAN BLEND · 10P</small></div></div>
         <h3>안목 드립백 커피 세트</h3><p>로컬 로스터리 블렌드 10개입</p>
-        <div class="row"><b class="num">16,000<small>원 (예시)</small></b><button class="add" data-name="안목 드립백 커피 세트">담기</button></div>
+        <div class="row"><b class="num">16,000<small>원 (예시)</small></b><button class="add" data-id="drip">담기</button></div>
+        <button class="more-btn" data-product="drip">상세 정보 보기</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 브랜드 소개 -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="no">05</div>
+      <div><div class="k">About Wave Local</div><h2>로컬의 파도를 <b>기록하는 매거진</b></h2></div>
+      <div class="side"><span class="chip demo">과제용 가상 브랜드</span></div>
+    </div>
+    <div class="brand-grid">
+      <div class="reveal">
+        <p class="brand-lead">유명한 곳보다 <b>오래 머물고 싶은 곳</b>을,<br>빠른 여행보다 <b>느린 하루</b>를 소개합니다.</p>
+        <p>웨이브 로컬은 한 달에 한 도시를 골라 그 동네의 바다, 골목, 카페와 소품숍을 깊게 들여다보는 로컬 라이프스타일 매거진이에요. 읽은 이야기를 실제 여행으로 이어 갈 수 있도록 패스와 굿즈를 함께 큐레이션합니다.</p>
+      </div>
+      <div class="pillars reveal">
+        <div class="pillar"><div class="en">One city,<br>one month</div><div><h3>한 달에 한 도시</h3><p>매달 한 지역을 골라 코스와 이야기를 한 호의 매거진으로 엮어요. 이번 7호는 강릉이에요.</p></div></div>
+        <div class="pillar"><div class="en">Checked<br>information</div><div><h3>확인한 정보만</h3><p>관광지 주소와 운영 정보는 공개된 관광 정보를 기준으로 적고, 가상 상품과 예시 정보에는 따로 표시를 붙여요.</p></div></div>
+        <div class="pillar"><div class="en">Read, travel,<br>keep</div><div><h3>읽고, 떠나고, 간직하기</h3><p>매거진으로 영감을 얻고, 패스로 떠나고, 가이드북과 굿즈로 여행을 오래 기억해요.</p></div></div>
       </div>
     </div>
   </div>
@@ -514,7 +653,7 @@
 <section class="tint" id="model">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="no">05</div>
+      <div class="no">06</div>
       <div><div class="k">How Wave Local Works</div><h2>읽고, 떠나고, <b>간직하는 여행</b></h2></div>
       <div class="side">웨이브 로컬의 수익 구조</div>
     </div>
@@ -542,13 +681,37 @@
   <div class="wrap">
     <div class="ft">
       <div><span class="logo">WAVE<i>Local</i></span><p style="margin-top:16px">로컬 라이프스타일 매거진 &amp; 트래블 패스 플랫폼<br>(과제용 가상 브랜드)</p></div>
-      <div><h4>Explore</h4><a href="tour.html">이달의 강릉 코스</a><a href="promo.html">시네마틱 영상</a><a href="#magazine">매거진</a></div>
+      <div><h4>Explore</h4><a href="tour.html">이달의 강릉 코스</a><a href="promo.html">시네마틱 영상</a><a href="#magazine">매거진</a><a href="#about">브랜드 소개</a></div>
       <div><h4>Book &amp; Shop</h4><a href="#pass">로컬 패스</a><a href="#shop">가이드북 · 굿즈</a></div>
       <div><h4>Account</h4><a href="#" class="demo" data-title="로그인">로그인</a><a href="#" class="demo" data-title="마이페이지">마이페이지</a></div>
     </div>
     <div class="ft-bottom"><span>© Wave Local · 연성대학교 호텔관광과 김혜나 과제</span><span>모든 가격 · 수량 · 기사는 예시이며 실제 서비스가 아닙니다</span></div>
   </div>
 </footer>
+
+
+<!-- 모바일 메뉴 -->
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="dim" data-close></div>
+  <div class="panel" role="dialog" aria-label="전체 메뉴">
+    <div class="dhead"><span class="logo">WAVE<i>Local</i></span><button class="close" data-close aria-label="메뉴 닫기">×</button></div>
+    <div class="dlabel">Explore</div>
+    <a href="tour.html">이달의 추천 강릉 코스 <span>→</span></a>
+    <a href="promo.html">시네마틱 홍보 영상 <span>▶</span></a>
+    <a href="#magazine" data-close>매거진 <span>02</span></a>
+    <a href="#about" data-close>브랜드 소개 <span>05</span></a>
+    <div class="dlabel">Book &amp; Shop</div>
+    <a href="#pass" data-close>시그니처 로컬 패스 <span>03</span></a>
+    <a href="#shop" data-close>가이드북 · 굿즈 숍 <span>04</span></a>
+    <button class="dbtn" id="dCart">장바구니 <span id="dCartN">0</span></button>
+    <div class="dlabel">Account</div>
+    <button class="dbtn demo" data-title="로그인">로그인 <span>→</span></button>
+    <button class="dbtn demo" data-title="마이페이지">마이페이지 <span>→</span></button>
+  </div>
+</div>
+
+<!-- 상세 패널 -->
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"><div class="sheet-box"><button class="sheet-x" data-sclose aria-label="닫기">×</button><div id="sheetC"></div></div></div>
 
 <!-- 안내 모달 -->
 <div class="modal" id="modal" role="dialog" aria-modal="true">
@@ -563,74 +726,252 @@
 <div class="toast" id="toast"></div>
 
 <script>
-  /* 스크롤하면 내용이 부드럽게 떠오름 */
+  /* ---------- 공통 도구 ---------- */
+  const $ = (q, el = document) => el.querySelector(q);
+  const $$ = (q, el = document) => [...el.querySelectorAll(q)];
+  const won = n => n.toLocaleString('ko-KR') + '원';
+  const esc = t => String(t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+  /* ---------- 스크롤하면 내용이 부드럽게 떠오름 ---------- */
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (!e.isIntersecting) return;
     const sibs = [...e.target.parentElement.children].filter(c => c.classList.contains('reveal'));
     setTimeout(() => e.target.classList.add('show'), Math.max(0, sibs.indexOf(e.target)) * 120);
     io.unobserve(e.target);
   }), { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  $$('.reveal').forEach(el => io.observe(el));
 
-  /* 모달 */
-  const modal = document.getElementById('modal');
-  const openModal = (title, html) => {
-    document.getElementById('mTitle').textContent = title;
-    document.getElementById('mText').innerHTML = html;
-    modal.classList.add('open');
-  };
+  /* ---------- 안내 모달 (로그인 · 마이페이지) ---------- */
+  const modal = $('#modal');
+  const openModal = (title, html) => { $('#mTitle').textContent = title; $('#mText').innerHTML = html; modal.classList.add('open'); };
   const closeModal = () => modal.classList.remove('open');
-  document.querySelectorAll('.demo').forEach(b => b.addEventListener('click', e => {
-    e.preventDefault();
+  $$('.demo').forEach(b => b.addEventListener('click', e => {
+    e.preventDefault(); closeDrawer();
     openModal(b.dataset.title + ' 안내', '과제용 데모 사이트이므로<br>실제 로그인은 지원하지 않습니다.');
   }));
-  document.getElementById('modalX').onclick = closeModal;
-  document.getElementById('modalOk').onclick = closeModal;
+  $('#modalX').onclick = closeModal; $('#modalOk').onclick = closeModal;
   modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-  addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  /* 토스트 알림 */
-  const toast = document.getElementById('toast');
-  let tt;
+  /* ---------- 토스트 알림 ---------- */
+  const toast = $('#toast'); let tt;
   const showToast = html => { toast.innerHTML = html; toast.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove('show'), 2200); };
 
-  /* 로컬 패스 예약 */
-  const won = n => n.toLocaleString('ko-KR') + '원';
-  let price = 29000, qty = 2, passName = '강릉 원데이 패스';
-  const qtyN = document.getElementById('qtyN'), total = document.getElementById('bkTotal'), bkName = document.getElementById('bkName');
-  const update = () => { qtyN.textContent = qty; total.textContent = won(price * qty); bkName.textContent = passName; };
-  document.querySelectorAll('.pass').forEach(p => p.addEventListener('click', e => {
-    if (e.target.closest('a')) return;
-    document.querySelectorAll('.pass').forEach(x => x.classList.toggle('sel', x === p));
-    price = +p.dataset.price; passName = p.dataset.name;
-    qty = passName === '오션 스테이 패스' ? 1 : Math.max(qty, 1);
-    update();
-    document.querySelector('.booking').scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }));
-  document.getElementById('plus').onclick = () => { qty = Math.min(qty + 1, 10); update(); };
-  document.getElementById('minus').onclick = () => { qty = Math.max(qty - 1, 1); update(); };
-  const d = new Date(); d.setDate(d.getDate() + 7);
-  document.getElementById('bkDate').value = d.toISOString().slice(0, 10);
-  document.getElementById('payBtn').onclick = () => openModal('결제 안내',
-    `<b>${passName}</b> · ${qty}${passName === '오션 스테이 패스' ? '건' : '매'} · ${won(price * qty)}<br><br>과제용 데모 사이트이므로<br>실제 결제는 진행되지 않습니다.`);
-  update();
+  /* ---------- 모바일 메뉴 ---------- */
+  const drawer = $('#drawer'), burger = $('#burger');
+  function openDrawer() { drawer.classList.add('open'); drawer.setAttribute('aria-hidden', 'false'); burger.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+  function closeDrawer() { drawer.classList.remove('open'); drawer.setAttribute('aria-hidden', 'true'); burger.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+  burger.addEventListener('click', openDrawer);
+  $$('[data-close]', drawer).forEach(el => el.addEventListener('click', closeDrawer));
+  $('#dCart').addEventListener('click', () => { closeDrawer(); openCart(); });
 
-  /* 숍 장바구니 */
-  let cart = 0;
-  const cartN = document.getElementById('cartN'), cartBtn = document.getElementById('cartBtn');
-  document.querySelectorAll('.add').forEach(b => b.addEventListener('click', () => {
-    cart++; cartN.textContent = cart;
-    cartBtn.classList.remove('bump'); void cartBtn.offsetWidth; cartBtn.classList.add('bump');
+  /* ---------- 상세 패널 ---------- */
+  const sheet = $('#sheet'), sheetC = $('#sheetC');
+  function openSheet(html) { sheetC.onclick = null; sheetC.innerHTML = html; sheet.classList.add('open'); $('.sheet-box', sheet).scrollTop = 0; document.body.style.overflow = 'hidden'; }
+  function closeSheet() { sheet.classList.remove('open'); document.body.style.overflow = ''; if (location.hash.startsWith('#article-')) history.replaceState(null, '', location.pathname); }
+  sheet.addEventListener('click', e => { if (e.target === sheet || e.target.closest('[data-sclose]')) closeSheet(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeSheet(); closeDrawer(); } });
+
+  /* ---------- 매거진 기사 (장소 정보는 공개 관광 정보 기준) ---------- */
+  const ARTICLES = {
+    cafe: {
+      img: "url('https://images.unsplash.com/photo-1760175445000-0e01e193d1cd?w=1400&q=80&auto=format&fit=crop'), url('images/room-ocean.jpg')",
+      k: 'Café · Issue 07', title: '창밖이 전부 바다인,<br>안목 커피거리 산책',
+      body: `<p>강릉 견소동의 안목해변 앞에는 바다를 바라보는 카페들이 길을 따라 모여 있어요. 해변을 먼저 걷고, 마음에 드는 창가 자리를 골라 커피 한 잔으로 쉬어 가는 순서를 추천해요.</p>
+             <h4>에디터의 산책 팁 (예시)</h4>
+             <p>오전에는 비교적 한산해 창가 자리를 고르기 쉬워요. 카페마다 영업시간이 다르니 가고 싶은 곳은 방문 전에 따로 확인하세요.</p>`,
+      info: [['주소', '강원특별자치도 강릉시 창해로14번길 20-1 (견소동)'], ['운영', '상시 개방 · 카페별 영업시간 상이'], ['주차', '안목해변 주차장, 강릉항 공영주차장 (무료)'], ['요금', '거리 이용 무료']],
+      src: '출처: 한국관광공사 등록 정보 기준 · 방문 전 최신 정보를 확인하세요.'
+    },
+    seongyojang: {
+      img: "url('https://images.unsplash.com/photo-1704619193133-5bc3b739c7d4?w=1400&q=80&auto=format&fit=crop'), url('images/seongyojang.jpg')",
+      k: 'Heritage · Issue 07', title: '300년 고택에서<br>배우는 느린 시간',
+      body: `<p>선교장은 조선 영조 때(1703년) 이내번이 터를 잡은 뒤 후손이 대대로 살아온 사대부 가옥이에요. 국가민속문화유산으로 지정되어 있고, 대문 밖 연못 위에는 돌기둥을 세워 지은 정자 활래정이 있어요.</p>
+             <h4>에디터의 산책 팁 (예시)</h4>
+             <p>활래정과 연못을 먼저 본 뒤 안채와 사랑채(열화당)를 차례로 둘러보면 동선이 자연스러워요. 문화관광해설(약 30~40분)을 함께 들으면 집의 이야기를 더 깊게 알 수 있어요.</p>`,
+      info: [['주소', '강원특별자치도 강릉시 운정길 63'], ['관람', '09:00~18:00 (동절기 ~17:00) · 연중무휴'], ['입장료', '성인 5,000원 / 청소년 3,000원 / 어린이 2,000원'], ['해설', '09:00~16:00 (점심 12:00~13:30 제외) · 30~40분'], ['문의', '033-648-5303']],
+      src: '출처: 한국관광공사 등록 정보 · 강릉선교장 안내 기준 · 요금과 시간은 바뀔 수 있으니 방문 전 확인하세요.'
+    }
+  };
+  function openArticle(key) {
+    const a = ARTICLES[key]; if (!a) return;
+    openSheet(`<div class="sheet-hero photo" style="--img:${a.img}"></div>
+      <div class="sheet-body">
+        <div class="k">${a.k}</div><h3>${a.title}</h3>
+        <p style="margin-bottom:16px"><span class="chip real">장소 정보: 실제</span> <span class="chip demo">에디터 글 · 팁: 예시</span></p>
+        ${a.body}
+        <dl class="info">${a.info.map(([t, v]) => `<div><dt>${t}</dt><dd>${v}</dd></div>`).join('')}</dl>
+        <p class="src">${a.src}</p>
+        <div class="sheet-actions"><a class="btn navy" href="tour.html#course">이 장소가 담긴 강릉 코스 보기 →</a><button class="btn line" data-sclose>닫기</button></div>
+      </div>`);
+  }
+  $$('[data-article]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); history.replaceState(null, '', '#article-' + a.dataset.article); openArticle(a.dataset.article); }));
+  if (location.hash.startsWith('#article-')) openArticle(location.hash.slice(9));
+
+  /* ---------- 숍 상품 (가상 상품 · 모든 정보 예시) ---------- */
+  const PRODUCTS = {
+    guide: { name: '프리미엄 가이드북 : 강릉', price: 18000, desc: '웨이브 로컬 7호 강릉 편을 한 권에 담은 여행 가이드북이에요.',
+      spec: [['구성', '1박 2일 추천 코스 · 손그림 지도 · 바다 카페 리스트 · 로컬 에티켓'], ['사양', '약 120쪽 · 148×210mm · 무선 제본'], ['발행', '웨이브 로컬 편집부 (가상)'], ['배송', '주문 후 2~3일 이내 출고']] },
+    bag: { name: '오션 캔버스 에코백', price: 24000, desc: '가이드북과 카메라가 함께 들어가는 데일리 사이즈 에코백이에요.',
+      spec: [['소재', '면 캔버스 (두꺼운 원단)'], ['크기', '약 38 × 42cm · 끈 길이 약 60cm'], ['구성', '내부 포켓 1개'], ['관리', '찬물 손세탁 권장 · 건조기 사용 금지']] },
+    card: { name: '강릉 엽서 세트 (6종)', price: 9000, desc: '바다, 소나무 숲, 고택을 그린 일러스트 엽서 세트예요.',
+      spec: [['구성', '엽서 6장 · 크라프트 봉투 1개'], ['크기', '100 × 148mm'], ['인쇄', '무광 아트지 · 뒷면 필기 가능'], ['배송', '주문 후 2~3일 이내 출고']] },
+    drip: { name: '안목 드립백 커피 세트', price: 16000, desc: '여행에서 마신 바다 커피를 집에서도 즐길 수 있는 드립백 세트예요.',
+      spec: [['구성', '드립백 10개입 (1개 약 10g)'], ['원두', '오션 블렌드 · 제휴 로스터리 (가상)'], ['보관', '직사광선을 피해 서늘한 곳에 보관'], ['소비기한', '상세 기한은 실제 상품 출시 시 표기']] }
+  };
+  function openProduct(id) {
+    const p = PRODUCTS[id]; let q = 1;
+    openSheet(`<div class="sheet-body">
+      <div class="k">Wave Local Shop</div><h3>${p.name}</h3>
+      <p style="margin-bottom:14px"><span class="chip demo">가상 상품 · 상세 정보 예시</span></p>
+      <p>${p.desc}</p>
+      <dl class="info">${p.spec.map(([t, v]) => `<div><dt>${t}</dt><dd>${v}</dd></div>`).join('')}<div><dt>가격</dt><dd><b class="num">${won(p.price)}</b> (예시)</dd></div></dl>
+      <div class="sheet-actions" style="align-items:center">
+        <div class="stepper"><button id="pMinus" aria-label="수량 빼기">−</button><span id="pQty">1</span><button id="pPlus" aria-label="수량 더하기">+</button></div>
+        <span id="pSum" class="num" style="font-family:var(--en);font-size:24px;color:var(--navy)">${won(p.price)}</span>
+        <button class="btn navy" id="pAdd" style="margin-left:auto">장바구니 담기</button>
+      </div>
+      <div class="notice-box">과제용 가상 상품이에요. 실제로 판매·배송되지 않아요.</div>
+    </div>`);
+    const upd = () => { $('#pQty').textContent = q; $('#pSum').textContent = won(p.price * q); };
+    $('#pMinus').onclick = () => { q = Math.max(1, q - 1); upd(); };
+    $('#pPlus').onclick = () => { q = Math.min(10, q + 1); upd(); };
+    $('#pAdd').onclick = () => { addToCart(id, q); closeSheet(); };
+  }
+  $$('[data-product]').forEach(b => b.addEventListener('click', () => openProduct(b.dataset.product)));
+
+  /* ---------- 장바구니 ---------- */
+  const cart = {};
+  const cartCount = () => Object.values(cart).reduce((a, b) => a + b, 0);
+  function syncCart() {
+    const n = cartCount();
+    $('#cartN').textContent = n; $('#dCartN').textContent = n;
+    const cb = $('#cartBtn'); cb.classList.remove('bump'); void cb.offsetWidth; cb.classList.add('bump');
+  }
+  function addToCart(id, q = 1) {
+    cart[id] = Math.min(10, (cart[id] || 0) + q); syncCart();
+    showToast(`<b>${PRODUCTS[id].name}</b> ${q}개를 장바구니에 담았어요 · 데모`);
+  }
+  $$('.add').forEach(b => b.addEventListener('click', () => {
+    addToCart(b.dataset.id, 1);
     b.textContent = '담김 ✓'; b.classList.add('done');
     setTimeout(() => { b.textContent = '담기'; b.classList.remove('done'); }, 1600);
-    showToast(`<b>${b.dataset.name}</b>을(를) 장바구니에 담았어요 · 데모`);
   }));
-  cartBtn.addEventListener('click', () => openModal('장바구니', `담은 상품 <b>${cart}개</b><br><br>과제용 데모 사이트이므로<br>실제 주문과 결제는 진행되지 않습니다.`));
+  function renderCart() {
+    const ids = Object.keys(cart).filter(id => cart[id] > 0);
+    const total = ids.reduce((a, id) => a + PRODUCTS[id].price * cart[id], 0);
+    return `<div class="sheet-body">
+      <div class="k">Your Cart</div><h3>장바구니</h3>
+      ${ids.length ? ids.map(id => `<div class="cart-row" data-id="${id}">
+          <div class="nm">${PRODUCTS[id].name}<small>${won(PRODUCTS[id].price)} · 예시 가격</small></div>
+          <div class="stepper"><button data-act="minus" aria-label="수량 빼기">−</button><span>${cart[id]}</span><button data-act="plus" aria-label="수량 더하기">+</button></div>
+          <div class="sum num">${won(PRODUCTS[id].price * cart[id])}</div>
+          <button class="del" data-act="del">삭제</button></div>`).join('')
+        + `<div class="cart-total"><span>합계 (예시)</span><b class="num">${won(total)}</b></div>`
+        : `<div class="empty">장바구니가 비어 있어요.<br><a href="#shop" data-sclose style="color:var(--gold);border-bottom:1px solid var(--gold)">숍 둘러보기 →</a></div>`}
+      <div class="sheet-actions">${ids.length ? '<button class="btn navy" id="orderBtn">주문하기</button>' : ''}<button class="btn line" data-sclose>계속 둘러보기</button></div>
+      <div class="notice-box" id="cartNote">과제용 데모 사이트라 실제 주문과 결제는 진행되지 않아요.</div>
+    </div>`;
+  }
+  function openCart() {
+    openSheet(renderCart());
+    sheetC.onclick = e => {
+      const btn = e.target.closest('[data-act]');
+      if (btn) {
+        const id = btn.closest('.cart-row').dataset.id, act = btn.dataset.act;
+        if (act === 'plus') cart[id] = Math.min(10, cart[id] + 1);
+        if (act === 'minus') cart[id] = Math.max(1, cart[id] - 1);
+        if (act === 'del') delete cart[id];
+        syncCart(); sheetC.innerHTML = renderCart(); return;
+      }
+      if (e.target.id === 'orderBtn') $('#cartNote').innerHTML = '<b>주문이 진행되지 않았어요.</b> 과제용 데모 사이트라 실제 주문·결제 기능이 없어요.';
+    };
+  }
+  $('#cartBtn').addEventListener('click', openCart);
 
-  /* 뉴스레터 */
-  document.getElementById('newsForm').addEventListener('submit', e => {
+  /* ---------- 로컬 패스 선택 · 가격 계산 ---------- */
+  let price = 29000, qty = 2, passName = '강릉 원데이 패스', perRoom = false;
+  const qtyN = $('#qtyN'), total = $('#bkTotal'), bkName = $('#bkName'), bkDate = $('#bkDate');
+  const update = () => { qtyN.textContent = qty; total.textContent = won(price * qty); bkName.textContent = passName; $('#qtyUnit').textContent = perRoom ? '객실' : '인원'; };
+  $$('.pass').forEach(p => p.addEventListener('click', e => {
+    if (e.target.closest('a')) return;
+    $$('.pass').forEach(x => x.classList.toggle('sel', x === p));
+    price = +p.dataset.price; passName = p.dataset.name; perRoom = passName === '오션 스테이 패스';
+    qty = perRoom ? 1 : Math.max(qty, 1);
+    update();
+    $('.booking').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }));
+  $('#plus').onclick = () => { qty = Math.min(qty + 1, perRoom ? 3 : 10); update(); };
+  $('#minus').onclick = () => { qty = Math.max(qty - 1, 1); update(); };
+  const today = new Date(); const iso = d => new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
+  bkDate.min = iso(today);
+  const d7 = new Date(); d7.setDate(d7.getDate() + 7); bkDate.value = iso(d7);
+  update();
+
+  /* ---------- 예약 3단계 (확인 → 예약자 정보 → 요청 내용 확인) ---------- */
+  const people = () => perRoom ? qty * 2 : qty;
+  const unit = () => perRoom ? `${qty}객실 (${qty * 2}인)` : `${qty}인`;
+  const stepsBar = n => `<div class="steps">${['1 예약 내용 확인', '2 예약자 정보', '3 요청 내용 확인'].map((t, i) => `<span class="${i + 1 === n ? 'on' : i + 1 < n ? 'done' : ''}">${t}</span>`).join('')}</div>`;
+  const summary = () => `<dl class="info"><div><dt>패스</dt><dd>${passName} <span class="chip demo">가상 상품</span></dd></div><div><dt>이용일</dt><dd>${bkDate.value || '-'}</dd></div><div><dt>수량</dt><dd>${unit()}</dd></div><div><dt>금액</dt><dd><b class="num">${won(price * qty)}</b> (예시)</dd></div></dl>`;
+  let guest = { name: '', phone: '' };
+
+  function step1() {
+    if (!bkDate.value || bkDate.value < bkDate.min) {
+      bkDate.focus(); bkDate.style.outline = '1px solid #e7a89f';
+      showToast('이용 날짜를 오늘 이후로 선택해 주세요'); return;
+    }
+    bkDate.style.outline = '';
+    openSheet(`<div class="sheet-body"><div class="k">Signature Local Pass</div><h3>예약하기</h3>${stepsBar(1)}${summary()}
+      <div class="sheet-actions"><button class="btn navy" id="toStep2">다음 · 예약자 정보 입력 →</button><button class="btn line" data-sclose>날짜 · 수량 바꾸기</button></div>
+      <div class="notice-box">가격과 잔여 수량은 예시예요. 실제 결제는 진행되지 않아요.</div></div>`);
+    $('#toStep2').onclick = step2;
+  }
+  function step2() {
+    sheetC.innerHTML = `<div class="sheet-body"><div class="k">Signature Local Pass</div><h3>예약자 정보</h3>${stepsBar(2)}
+      <div class="fgrid">
+        <div class="f"><label for="gName">예약자 이름</label><input type="text" id="gName" maxlength="20" autocomplete="name" value="${esc(guest.name)}" placeholder="예) 김소담"><span class="err" id="eName"></span></div>
+        <div class="f"><label for="gPhone">연락처</label><input type="tel" id="gPhone" maxlength="13" autocomplete="tel" value="${esc(guest.phone)}" placeholder="010-0000-0000"><span class="err" id="ePhone"></span></div>
+        <div class="f full"><label>이용 인원 확인</label>
+          <label class="check"><input type="checkbox" id="gPeople"><span>이용 인원이 <b>${unit()}</b>이 맞습니다. (${passName}, ${bkDate.value})</span></label>
+          <span class="err" id="ePeople"></span></div>
+        <div class="f full"><label class="check"><input type="checkbox" id="gDemo"><span>과제용 데모 사이트라 실제 예약·결제가 되지 않고, 입력한 정보가 저장·전송되지 않는다는 것을 확인했습니다.</span></label><span class="err" id="eDemo"></span></div>
+      </div>
+      <div class="sheet-actions"><button class="btn navy" id="toStep3">다음 · 요청 내용 확인 →</button><button class="btn line" id="back1">이전</button></div></div>`;
+    const ph = $('#gPhone');
+    ph.addEventListener('input', () => {
+      const d = ph.value.replace(/\D/g, '').slice(0, 11);
+      ph.value = d.length < 4 ? d : d.length < 8 ? `${d.slice(0, 3)}-${d.slice(3)}` : `${d.slice(0, 3)}-${d.slice(3, d.length - 4)}-${d.slice(-4)}`;
+    });
+    $('#back1').onclick = step1;
+    $('#toStep3').onclick = () => {
+      const name = $('#gName').value.trim(), phone = ph.value.trim();
+      const ok = {
+        name: /^[가-힣a-zA-Z\s]{2,20}$/.test(name),
+        phone: /^01[016789]-\d{3,4}-\d{4}$/.test(phone),
+        people: $('#gPeople').checked, demo: $('#gDemo').checked
+      };
+      $('#eName').textContent = ok.name ? '' : '이름을 2자 이상 입력해 주세요 (한글·영문).';
+      $('#ePhone').textContent = ok.phone ? '' : '휴대폰 번호를 010-0000-0000 형식으로 입력해 주세요.';
+      $('#ePeople').textContent = ok.people ? '' : '이용 인원을 확인해 주세요.';
+      $('#eDemo').textContent = ok.demo ? '' : '데모 안내를 확인해 주세요.';
+      if (Object.values(ok).every(Boolean)) { guest = { name, phone }; step3(); }
+    };
+  }
+  function step3() {
+    const masked = guest.phone.replace(/-(\d{3,4})-/, (m, a) => '-' + '*'.repeat(a.length) + '-');
+    sheetC.innerHTML = `<div class="sheet-body"><div class="k">Signature Local Pass</div><h3>예약 요청 내용 확인</h3>${stepsBar(3)}
+      ${summary()}
+      <dl class="info" style="border-top:none"><div><dt>예약자</dt><dd>${esc(guest.name)}</dd></div><div><dt>연락처</dt><dd>${masked}</dd></div><div><dt>인원</dt><dd>${people()}명 확인함</dd></div></dl>
+      <div class="notice-box"><b>예약과 결제는 진행되지 않았어요.</b><br>과제용 데모 사이트라 실제 예약 접수·결제 기능이 없으며, 입력한 정보는 저장되거나 전송되지 않아요. 창을 닫으면 사라져요.</div>
+      <div class="sheet-actions"><button class="btn line" id="back2">정보 수정</button><button class="btn navy" id="doneBtn">확인하고 닫기</button></div></div>`;
+    $('#back2').onclick = step2;
+    $('#doneBtn').onclick = () => { guest = { name: '', phone: '' }; closeSheet(); };
+  }
+  $('#payBtn').addEventListener('click', step1);
+
+  /* ---------- 뉴스레터 ---------- */
+  $('#newsForm').addEventListener('submit', e => {
     e.preventDefault(); e.target.reset();
-    document.getElementById('newsMsg').textContent = '구독 신청이 접수되었어요! (과제용 데모라 실제 메일은 발송되지 않아요)';
+    $('#newsMsg').textContent = '구독 신청 화면만 보여 드리는 데모예요. 실제로 메일이 등록·발송되지 않아요.';
   });
 </script>
 </body>

@@ -232,9 +232,67 @@
   .modal-box .btn:hover { background: var(--gold); }
   .modal-x { position: absolute; right: 18px; top: 14px; background: none; border: none; font-size: 26px; font-weight: 300; color: var(--muted); cursor: pointer; }
 
+
+  /* ================= 실제 / 가상 구분 ================= */
+  .chip { display: inline-flex; align-items: center; gap: 6px; font-family: var(--ko); font-size: 11px; letter-spacing: .1em; padding: 3px 10px; border-radius: 20px; white-space: nowrap; font-weight: 400; font-style: normal; vertical-align: middle; }
+  .chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; }
+  .chip.real { background: rgba(31,95,116,.1); color: #1f5f74; }
+  .chip.real::before { background: #1f5f74; }
+  .chip.demo { background: rgba(201,162,93,.14); color: #8a6a2e; }
+  .chip.demo::before { border: 1px solid #b38b47; }
+  .place .chip.real, .notice .chip.real { background: rgba(255,255,255,.16); color: #d9eef5; }
+  .place .chip.real::before, .notice .chip.real::before { background: #a9d4e2; }
+  .notice .chip.demo { color: var(--gold); background: rgba(201,162,93,.18); }
+  .place .addr { font-size: 12.5px; color: rgba(255,255,255,.7); margin-top: 10px; letter-spacing: .04em; }
+
+  /* ================= 코스 상세 ================= */
+  .route-line { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--navy); border-bottom: 1px solid var(--line); margin-bottom: 56px; }
+  .route-line .stop { padding: 22px 18px 20px 0; position: relative; }
+  .route-line .stop + .stop { padding-left: 18px; border-left: 1px solid var(--line); }
+  .route-line .d { font-family: var(--en); font-size: 13px; letter-spacing: .24em; color: var(--gold); text-transform: uppercase; }
+  .route-line .n { font-weight: 500; font-size: 15.5px; color: var(--navy); margin-top: 4px; }
+  .route-line .m { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+  .route-line .m b { color: var(--navy); font-weight: 500; }
+  .course { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .stop-card { background: #fff; border: 1px solid var(--line); display: flex; flex-direction: column; }
+  .stop-card .pic { height: 190px; position: relative; }
+  .stop-card .pic .photo { position: absolute; inset: 0; }
+  .stop-card .pic .chip { position: absolute; left: 16px; top: 16px; background: rgba(247,244,239,.92); }
+  .stop-card .body { padding: 26px 26px 28px; }
+  .stop-card .no { font-family: var(--en); font-style: italic; color: var(--gold); font-size: 18px; }
+  .stop-card h3 { font-family: var(--ko-serif); font-weight: 500; font-size: 22px; color: var(--navy); margin: 2px 0 16px; }
+  .stop-card dl div { display: grid; grid-template-columns: 82px 1fr; gap: 10px; padding: 10px 0; border-top: 1px solid var(--line); font-size: 13.5px; }
+  .stop-card dt { color: var(--muted); }
+  .stop-card dd { color: var(--ink); }
+  .stop-card .tip { margin-top: 14px; font-size: 13px; color: var(--muted); }
+  .course-note { margin-top: 32px; font-size: 13px; color: var(--muted); line-height: 1.9; }
+  .course-note b { color: var(--navy); font-weight: 500; }
+
+  /* ================= 모바일 메뉴 ================= */
+  .burger { display: none; width: 38px; height: 38px; background: none; border: none; cursor: pointer; position: relative; color: inherit; }
+  .burger i { position: absolute; left: 9px; right: 9px; height: 1px; background: currentColor; }
+  .burger i:nth-child(1) { top: 13px; } .burger i:nth-child(2) { top: 19px; } .burger i:nth-child(3) { top: 25px; }
+  .drawer { position: fixed; inset: 0; z-index: 150; pointer-events: none; }
+  .drawer .dim { position: absolute; inset: 0; background: rgba(6,17,27,.5); opacity: 0; transition: opacity .4s var(--ease); }
+  .drawer .panel { position: absolute; top: 0; right: 0; bottom: 0; width: min(86vw, 360px); background: var(--sand); color: var(--navy); transform: translateX(100%); transition: transform .45s var(--ease); padding: 22px 28px 34px; overflow-y: auto; }
+  .drawer.open { pointer-events: auto; }
+  .drawer.open .dim { opacity: 1; }
+  .drawer.open .panel { transform: none; }
+  .drawer .dhead { display: flex; justify-content: space-between; align-items: center; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+  .drawer .dhead .logo { font-size: 17px; letter-spacing: .3em; }
+  .drawer .close { background: none; border: none; font-size: 30px; font-weight: 200; color: var(--navy); cursor: pointer; line-height: 1; }
+  .drawer .dlabel { font-family: var(--en); font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin: 24px 0 4px; }
+  .drawer a, .drawer .dbtn { display: flex; justify-content: space-between; padding: 13px 0; border: none; border-bottom: 1px solid var(--line); font-size: 15.5px; background: none; width: 100%; text-align: left; cursor: pointer; font-family: var(--ko); font-weight: 300; color: var(--navy); }
+  .drawer a span, .drawer .dbtn span { font-family: var(--en); color: var(--gold); }
+
   /* ================= 모바일 ================= */
   @media (max-width: 960px) {
-    nav, .tb-btn.hide-m { display: none; }
+    nav, .tb-btn.hide-m, .tb-btn.demo { display: none; }
+    .burger { display: inline-block; }
+    .course { grid-template-columns: 1fr; }
+    .route-line { grid-template-columns: 1fr; }
+    .route-line .stop, .route-line .stop + .stop { padding: 16px 0; border-left: none; border-top: 1px solid var(--line); }
+    .route-line .stop:first-child { border-top: none; }
     .topbar { padding: 0 18px; }
     .tb-left, .tb-right { gap: 14px; }
     .logo { font-size: 16px; letter-spacing: .3em; }
@@ -276,6 +334,7 @@
       <a href="#about" data-ko="소개" data-en="About">소개</a>
       <a href="#rooms" data-ko="객실" data-en="Rooms">객실</a>
       <a href="#package" data-ko="패키지" data-en="Package">패키지</a>
+      <a href="#course" data-ko="코스 정보" data-en="Course">코스 정보</a>
       <a href="#places" data-ko="주변 관광" data-en="Nearby">주변 관광</a>
     </nav>
   </div>
@@ -285,6 +344,7 @@
     <button class="tb-btn hide-m demo" data-ko="예약확인" data-en="My Booking">예약확인</button>
     <button class="tb-btn demo" data-ko="로그인" data-en="Sign In">로그인</button>
     <a class="tb-book" href="#contact" data-ko="예약 문의" data-en="Reserve">예약 문의</a>
+    <button class="burger" id="burger" aria-label="메뉴 열기" aria-expanded="false"><i></i><i></i><i></i></button>
   </div>
 </header>
 
@@ -306,7 +366,7 @@
   <div class="scroll"></div>
 </div>
 
-<div class="notice">※ <b>스테이 소담은 과제용 가상 호텔</b>이며, 페이지의 가격·시간·후기·주소는 모두 <b>예시</b>입니다.</div>
+<div class="notice"><span class="chip real">실제 관광 정보</span> 경포해변 · 안목해변 커피거리 · 선교장의 주소와 운영 정보 &nbsp;·&nbsp; <span class="chip demo">가상 · 예시</span> 스테이 소담 호텔 · 객실 · 가격 · 일정 시간 · 후기 · 호텔 주소</div>
 
 <!-- 소개 -->
 <section id="about">
@@ -385,7 +445,72 @@
         </ul>
       </div>
     </div>
-    <p class="note">※ 모든 시간은 예시입니다. 관광지 운영시간은 방문 전 공식 안내를 확인하세요.</p>
+    <p class="note">※ 모든 시간은 예시입니다. 장소별 주소 · 운영시간 · 이동 방법은 아래 <a href="#course" style="color:var(--gold);border-bottom:1px solid var(--gold)">코스 상세 정보</a>에서 확인하세요.</p>
+  </div>
+</section>
+
+<!-- 코스 상세 정보 -->
+<section id="course" class="tint">
+  <div class="inner">
+    <div class="head reveal">
+      <div><div class="idx">04 — Course Guide</div><h2 data-ko="코스 상세 정보" data-en="Course Guide">코스 상세 정보</h2></div>
+      <p>장소의 주소와 운영 정보는 <b>실제 공개 관광 정보</b>예요.<br>체류 시간과 이동 시간은 에디터가 제안하는 <b>예상치(예시)</b>예요.</p>
+    </div>
+
+    <div class="route-line reveal">
+      <div class="stop"><div class="d">Day 01 · 14:00</div><div class="n">스테이 소담 체크인</div><div class="m">KTX 강릉역에서 <b>택시 · 자가용</b> 약 15~20분 (예상)</div></div>
+      <div class="stop"><div class="d">Day 01 · 15:00</div><div class="n">경포해변</div><div class="m">호텔에서 <b>도보</b> (가상 호텔 위치 기준 · 예시)</div></div>
+      <div class="stop"><div class="d">Day 01 · 17:00</div><div class="n">선교장</div><div class="m">경포해변에서 <b>택시 · 자가용</b> 약 10분 (예상)</div></div>
+      <div class="stop"><div class="d">Day 02 · 12:00</div><div class="n">안목해변 커피거리</div><div class="m">호텔에서 <b>택시 · 자가용</b> 약 15~20분 (예상)</div></div>
+      <div class="stop"><div class="d">Day 02 · 14:00</div><div class="n">KTX 강릉역</div><div class="m">안목해변에서 <b>택시 · 자가용</b> 약 15분 (예상)</div></div>
+    </div>
+
+    <div class="course">
+      <div class="stop-card reveal">
+        <div class="pic"><div class="photo" style="--img:url('https://images.unsplash.com/photo-1644373653266-edcc0e58cc4c?w=900&q=80&auto=format&fit=crop'), url('images/gyeongpo-pine.jpg'); --pos:center 70%"></div><span class="chip real">실제 관광지</span></div>
+        <div class="body">
+          <div class="no">No. 01</div><h3>경포해변</h3>
+          <dl>
+            <div><dt>주소</dt><dd>강원특별자치도 강릉시 창해로 514 (안현동)</dd></div>
+            <div><dt>운영</dt><dd>상시 개방 · 연중무휴 · 입장 무료</dd></div>
+            <div><dt>주차</dt><dd>경포해변 공영주차장 (무료)</dd></div>
+            <div><dt>추천 체류</dt><dd>약 1시간 ~ 1시간 30분 <span class="chip demo">에디터 제안</span></dd></div>
+            <div><dt>다음 이동</dt><dd>선교장까지 택시 · 자가용 약 10분 (예상)</dd></div>
+          </dl>
+          <p class="tip">백사장과 소나무 숲을 함께 걸을 수 있는 강릉 대표 해변이에요.</p>
+        </div>
+      </div>
+      <div class="stop-card reveal">
+        <div class="pic"><div class="photo" style="--img:url('https://images.unsplash.com/photo-1704619193133-5bc3b739c7d4?w=900&q=80&auto=format&fit=crop'), url('images/seongyojang.jpg'); --pos:62% center"></div><span class="chip real">실제 관광지</span></div>
+        <div class="body">
+          <div class="no">No. 02</div><h3>선교장</h3>
+          <dl>
+            <div><dt>주소</dt><dd>강원특별자치도 강릉시 운정길 63</dd></div>
+            <div><dt>관람</dt><dd>09:00~18:00 (동절기 ~17:00) · 연중무휴</dd></div>
+            <div><dt>입장료</dt><dd>성인 5,000원 · 청소년 3,000원 · 어린이 2,000원</dd></div>
+            <div><dt>추천 체류</dt><dd>약 1시간 ~ 1시간 30분 <span class="chip demo">에디터 제안</span></dd></div>
+            <div><dt>다음 이동</dt><dd>호텔까지 택시 · 자가용 약 10분 (예상)</dd></div>
+          </dl>
+          <p class="tip">문화관광해설(09:00~16:00, 약 30~40분)을 함께 들으면 좋아요.</p>
+        </div>
+      </div>
+      <div class="stop-card reveal">
+        <div class="pic"><div class="photo" style="--img:url('https://images.unsplash.com/photo-1760175445000-0e01e193d1cd?w=900&q=80&auto=format&fit=crop'), url('images/room-ocean.jpg'); --pos:center"></div><span class="chip real">실제 관광지</span></div>
+        <div class="body">
+          <div class="no">No. 03</div><h3>안목해변 커피거리</h3>
+          <dl>
+            <div><dt>주소</dt><dd>강원특별자치도 강릉시 창해로14번길 20-1 (견소동)</dd></div>
+            <div><dt>운영</dt><dd>상시 개방 · 카페별 영업시간 상이</dd></div>
+            <div><dt>주차</dt><dd>안목해변 주차장 · 강릉항 공영주차장 (무료)</dd></div>
+            <div><dt>추천 체류</dt><dd>약 1시간 30분 ~ 2시간 <span class="chip demo">에디터 제안</span></dd></div>
+            <div><dt>다음 이동</dt><dd>KTX 강릉역까지 택시 · 자가용 약 15분 (예상)</dd></div>
+          </dl>
+          <p class="tip">바다를 마주한 카페들이 모인 거리예요. 가고 싶은 카페는 영업시간을 따로 확인하세요.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="course-note reveal">※ <b>주소 · 운영시간 · 입장료</b>는 한국관광공사 등록 정보와 강릉선교장 안내를 기준으로 적었어요. 요금과 시간은 바뀔 수 있으니 방문 전 공식 안내를 확인하세요.<br>※ <b>이동 시간</b>은 교통 상황에 따라 달라지는 예상치예요. 버스 노선과 정확한 소요 시간은 지도 앱에서 확인하세요. 스테이 소담은 가상 호텔이라 호텔 기준 이동 정보는 모두 예시예요.</p>
   </div>
 </section>
 
@@ -393,24 +518,24 @@
 <section id="places">
   <div class="inner">
     <div class="head reveal">
-      <div><div class="idx">04 — Nearby</div><h2 data-ko="추천 장소 3곳" data-en="Three Places to Wander">추천 장소 3곳</h2></div>
+      <div><div class="idx">05 — Nearby</div><h2 data-ko="추천 장소 3곳" data-en="Three Places to Wander">추천 장소 3곳</h2></div>
       <p>패키지 일정에 함께 담은 강릉 명소</p>
     </div>
     <div class="places">
       <div class="place reveal">
         <div class="photo" style="--img:url('https://images.unsplash.com/photo-1644373653266-edcc0e58cc4c?w=1000&q=80&auto=format&fit=crop'), url('images/gyeongpo-pine.jpg'); --pos:center"></div>
-        <div class="num">No. 01</div><h3>경포해변</h3><div class="en">Gyeongpo Beach</div>
-        <p>넓은 백사장과 소나무 숲이 이어지는 강릉 대표 해변이에요.</p>
+        <div class="num">No. 01 &nbsp;<span class="chip real">실제 관광지</span></div><h3>경포해변</h3><div class="en">Gyeongpo Beach</div>
+        <p>넓은 백사장과 소나무 숲이 이어지는 강릉 대표 해변이에요.</p><div class="addr">강릉시 창해로 514</div>
       </div>
       <div class="place reveal">
         <div class="photo" style="--img:url('https://images.unsplash.com/photo-1760175445000-0e01e193d1cd?w=1000&q=80&auto=format&fit=crop'), url('images/sea-pink.jpg'); --pos:center"></div>
-        <div class="num">No. 02</div><h3>안목해변 커피거리</h3><div class="en">Anmok Coffee Street</div>
-        <p>바다를 마주한 카페들이 줄지어 있는 커피 여행 명소예요.</p>
+        <div class="num">No. 02 &nbsp;<span class="chip real">실제 관광지</span></div><h3>안목해변 커피거리</h3><div class="en">Anmok Coffee Street</div>
+        <p>바다를 마주한 카페들이 줄지어 있는 커피 여행 명소예요.</p><div class="addr">강릉시 창해로14번길 20-1</div>
       </div>
       <div class="place reveal">
         <div class="photo" style="--img:url('https://images.unsplash.com/photo-1704619193133-5bc3b739c7d4?w=1000&q=80&auto=format&fit=crop'), url('images/seongyojang.jpg'); --pos:62% center"></div>
-        <div class="num">No. 03</div><h3>선교장</h3><div class="en">Seongyojang House</div>
-        <p>연못 위 정자 활래정이 있는, 300년 역사의 강릉 대표 고택이에요.</p>
+        <div class="num">No. 03 &nbsp;<span class="chip real">실제 관광지</span></div><h3>선교장</h3><div class="en">Seongyojang House</div>
+        <p>연못 위 정자 활래정이 있는, 300년 역사의 강릉 대표 고택이에요.</p><div class="addr">강릉시 운정길 63</div>
       </div>
     </div>
   </div>
@@ -420,7 +545,7 @@
 <section id="reviews" class="tint">
   <div class="inner">
     <div class="head reveal">
-      <div><div class="idx">05 — Guest Reviews</div><h2 data-ko="이용 후기" data-en="Guest Reviews">이용 후기</h2></div>
+      <div><div class="idx">06 — Guest Reviews</div><h2 data-ko="이용 후기" data-en="Guest Reviews">이용 후기</h2></div>
       <p>※ 과제용으로 작성한 <b>예시 후기</b>이며, 실제 투숙객의 후기가 아닙니다.</p>
     </div>
     <div class="reviews reveal">
@@ -448,7 +573,7 @@
 <section id="cost">
   <div class="inner">
     <div class="head reveal">
-      <div><div class="idx">06 — Price</div><h2 data-ko="예상 비용" data-en="Estimated Cost">예상 비용</h2></div>
+      <div><div class="idx">07 — Price</div><h2 data-ko="예상 비용" data-en="Estimated Cost">예상 비용</h2></div>
       <p>2인 기준 · 모든 금액은 예시이며 실제 요금이 아닙니다.</p>
     </div>
     <div class="cost-wrap">
@@ -472,7 +597,7 @@
 <section id="location" class="tint">
   <div class="inner">
     <div class="head reveal">
-      <div><div class="idx">07 — Location</div><h2 data-ko="오시는 길" data-en="Getting Here">오시는 길</h2></div>
+      <div><div class="idx">08 — Location</div><h2 data-ko="오시는 길" data-en="Getting Here">오시는 길</h2></div>
       <p>※ 호텔 주소는 과제용 <b>가상 주소</b>이며, 소요 시간은 예시입니다.</p>
     </div>
     <div class="loc reveal">
@@ -511,7 +636,7 @@
   <div class="photo" style="--img:url('https://images.unsplash.com/photo-1533222009245-969f0b87532b?w=2000&q=70&auto=format&fit=crop'), url('images/wine-candle.jpg')"></div>
   <div class="inner">
     <div class="head reveal">
-      <div><div class="idx">08 — Reservation</div><h2 data-ko="예약 문의" data-en="Reservation Inquiry">예약 문의</h2></div>
+      <div><div class="idx">09 — Reservation</div><h2 data-ko="예약 문의" data-en="Reservation Inquiry">예약 문의</h2></div>
       <p>원하시는 날짜를 남겨 주시면 안내해 드립니다.</p>
     </div>
     <form id="form" class="reveal">
@@ -532,6 +657,29 @@
   <div class="line"></div>
   <div>연성대학교 호텔관광과 김혜나 과제 · 모든 정보는 예시입니다</div>
 </footer>
+
+<!-- 모바일 메뉴 -->
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="dim" data-close></div>
+  <div class="panel" role="dialog" aria-label="전체 메뉴">
+    <div class="dhead"><span class="logo">STAY <span>SODAM</span></span><button class="close" data-close aria-label="메뉴 닫기">×</button></div>
+    <div class="dlabel">Stay Sodam</div>
+    <a href="#about" data-close>소개 <span>01</span></a>
+    <a href="#rooms" data-close>객실 <span>02</span></a>
+    <a href="#package" data-close>1박 2일 패키지 <span>03</span></a>
+    <a href="#course" data-close>코스 상세 정보 <span>04</span></a>
+    <a href="#places" data-close>추천 장소 <span>05</span></a>
+    <a href="#reviews" data-close>이용 후기 <span>06</span></a>
+    <a href="#cost" data-close>예상 비용 <span>07</span></a>
+    <a href="#location" data-close>오시는 길 <span>08</span></a>
+    <a href="#contact" data-close>예약 문의 <span>09</span></a>
+    <div class="dlabel">Wave Local</div>
+    <a href="index.html">← 홈으로 <span>Home</span></a>
+    <a href="promo.html">시네마틱 홍보 영상 <span>▶</span></a>
+    <button class="dbtn demo">예약확인 <span>→</span></button>
+    <button class="dbtn demo">로그인 <span>→</span></button>
+  </div>
+</div>
 
 <!-- 로그인 · 예약확인 안내 모달 -->
 <div class="modal" id="modal" role="dialog" aria-modal="true">
@@ -569,14 +717,20 @@
     document.documentElement.lang = lang;
   }));
 
+  // 모바일 메뉴
+  const drawer = document.getElementById('drawer'), burger = document.getElementById('burger');
+  const closeDrawer = () => { drawer.classList.remove('open'); drawer.setAttribute('aria-hidden', 'true'); burger.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; };
+  burger.addEventListener('click', () => { drawer.classList.add('open'); drawer.setAttribute('aria-hidden', 'false'); burger.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; });
+  drawer.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', closeDrawer));
+
   // 로그인 · 예약확인 → 안내 모달
   const modal = document.getElementById('modal');
   const close = () => modal.classList.remove('open');
-  document.querySelectorAll('.demo').forEach(b => b.addEventListener('click', () => modal.classList.add('open')));
+  document.querySelectorAll('.demo').forEach(b => b.addEventListener('click', () => { closeDrawer(); modal.classList.add('open'); }));
   document.getElementById('modalX').addEventListener('click', close);
   document.getElementById('modalOk').addEventListener('click', close);
   modal.addEventListener('click', e => { if (e.target === modal) close(); });
-  addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') { close(); closeDrawer(); } });
 
   // 문의 폼 (과제용이라 실제 전송은 하지 않음)
   document.getElementById('form').addEventListener('submit', e => {
