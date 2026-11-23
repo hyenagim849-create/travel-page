@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WAVE LOCAL | 로컬 라이프스타일 매거진 & 트래블 패스</title>
 <!--
-  웨이브 로컬(Wave Local) — 과제용 데모 사이트
+  웨이브 로컬(Wave Local) — 로컬 라이프스타일 매거진 & 트래블 패스 (가상 브랜드 · 포트폴리오)
   · 사진: Unsplash 무료 사진을 먼저 불러오고, 안 뜨면 images 폴더 사진 → 그라데이션 순서로 대신 표시
   · 가격·수량·잔여석·기사 내용은 모두 예시이며 실제 결제/로그인은 되지 않습니다.
 -->
@@ -352,6 +352,25 @@
   .cart-total { display: flex; justify-content: space-between; padding: 20px 0 0; font-size: 16px; color: var(--navy); }
   .cart-total b { font-family: var(--en); font-size: 28px; font-weight: 500; }
   .empty { padding: 30px 0; text-align: center; color: var(--muted); }
+  .auth-btn { width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; border: 1px solid var(--line); background: #fff; padding: 14px; font-size: 15px; cursor: pointer; font-family: var(--ko); color: var(--navy); transition: border-color .3s; }
+  .auth-btn:hover { border-color: var(--navy); }
+  .auth-or { display: flex; align-items: center; gap: 12px; margin: 22px 0; font-size: 12.5px; color: var(--muted); }
+  .auth-or::before, .auth-or::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .auth-form { display: grid; gap: 16px; }
+  .auth-form input[type=email], .auth-form input[type=password], .auth-form input[type=text] { width: 100%; border: none; border-bottom: 1px solid rgba(10,25,38,.3); background: transparent; padding: 10px 0; font-family: var(--ko); font-size: 15px; color: var(--navy); outline: none; }
+  .auth-form input:focus { border-color: var(--gold); }
+  .auth-err { font-size: 13px; color: #b0473a; min-height: 1.3em; }
+  .auth-links { display: flex; justify-content: space-between; font-size: 13px; margin-top: 4px; }
+  .auth-links button { background: none; border: none; padding: 0; color: var(--navy); text-decoration: underline; cursor: pointer; font-family: var(--ko); font-size: 13px; }
+  .me { display: flex; align-items: center; gap: 18px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+  .me .av { width: 58px; height: 58px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-size: 22px; overflow: hidden; flex: none; }
+  .me .av img { width: 100%; height: 100%; object-fit: cover; }
+  .me b { display: block; font-size: 18px; color: var(--navy); font-weight: 500; }
+  .me small { color: var(--muted); font-size: 13.5px; }
+  .req { padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 14px; display: grid; grid-template-columns: 1fr auto; gap: 4px 14px; }
+  .req b { color: var(--navy); font-weight: 500; }
+  .req small { color: var(--muted); }
+  .req .st { grid-row: span 2; align-self: center; font-size: 12px; color: #8a6a2e; background: rgba(201,162,93,.14); padding: 3px 10px; border-radius: 20px; }
   .item .more-btn { background: none; border: none; padding: 0; margin-top: 6px; font-size: 13px; color: var(--navy); border-bottom: 1px solid var(--gold); cursor: pointer; font-family: var(--ko); }
   .item .visual { cursor: pointer; }
   .feature-list li a { display: contents; }
@@ -411,7 +430,6 @@
 </head>
 <body>
 
-<div class="ribbon">※ <b>웨이브 로컬은 과제용 데모 사이트</b>입니다 · 모든 가격 · 수량 · 기사 내용은 <b>예시</b>이며 실제 결제와 로그인은 되지 않아요</div>
 
 <!-- 상단 바 -->
 <header class="topbar">
@@ -426,8 +444,8 @@
     </nav>
     <a class="logo" href="#top">WAVE<i>Local</i></a>
     <div class="tb-right">
-      <button class="demo hide-m" data-title="로그인">로그인</button>
-      <button class="demo hide-m" data-title="마이페이지">마이페이지</button>
+      <button class="hide-m" data-auth="login" id="loginBtn">로그인</button>
+      <button class="hide-m" data-auth="mypage">마이페이지</button>
       <button class="cart" id="cartBtn">장바구니 <b id="cartN">0</b></button>
       <button class="burger" id="burger" aria-label="메뉴 열기" aria-expanded="false"><i></i><i></i><i></i></button>
     </div>
@@ -473,7 +491,7 @@
     <div class="sec-head reveal">
       <div class="no">01</div>
       <div><div class="k">This Month's Pick</div><h2>이달의 여행지, <b>강릉</b></h2></div>
-      <div class="side">웨이브 로컬 × 스테이 소담<br>(과제용 가상 협업 · 예시)</div>
+      <div class="side">웨이브 로컬 × 스테이 소담<br>Issue 07 Special</div>
     </div>
     <div class="feature">
       <a class="film reveal" href="promo.html" aria-label="시네마틱 홍보 영상 보기">
@@ -635,7 +653,7 @@
     <div class="sec-head reveal">
       <div class="no">05</div>
       <div><div class="k">About Wave Local</div><h2>로컬의 파도를 <b>기록하는 매거진</b></h2></div>
-      <div class="side"><span class="chip demo">과제용 가상 브랜드</span></div>
+      <div class="side"><span class="chip demo">가상 브랜드</span></div>
     </div>
     <div class="brand-grid">
       <div class="reveal">
@@ -674,7 +692,7 @@
     <div><div class="k">Newsletter</div><h2>매달 첫 주, <b>새로운 로컬</b>을<br>메일로 받아 보세요</h2></div>
     <div>
       <form id="newsForm"><input type="email" placeholder="이메일 주소" required><button type="submit">SUBSCRIBE</button></form>
-      <p class="small" id="newsMsg">※ 과제용 데모라 실제로 메일이 발송되지는 않아요.</p>
+      <p class="small" id="newsMsg">뉴스레터는 오픈 준비 중이에요. 지금은 신청이 접수되지 않아요.</p>
     </div>
   </div>
 </section>
@@ -682,12 +700,12 @@
 <footer>
   <div class="wrap">
     <div class="ft">
-      <div><span class="logo">WAVE<i>Local</i></span><p style="margin-top:16px">로컬 라이프스타일 매거진 &amp; 트래블 패스 플랫폼<br>(과제용 가상 브랜드)</p></div>
+      <div><span class="logo">WAVE<i>Local</i></span><p style="margin-top:16px">로컬 라이프스타일 매거진 &amp; 트래블 패스 플랫폼<br>(가상 브랜드 · 포트폴리오)</p></div>
       <div><h4>Explore</h4><a href="tour.html">이달의 강릉 코스</a><a href="promo.html">시네마틱 영상</a><a href="#magazine">매거진</a><a href="#about">브랜드 소개</a></div>
       <div><h4>Book &amp; Shop</h4><a href="booking.html">여행 상품 예약</a><a href="#pass">로컬 패스</a><a href="#shop">가이드북 · 굿즈</a></div>
-      <div><h4>Account</h4><a href="#" class="demo" data-title="로그인">로그인</a><a href="#" class="demo" data-title="마이페이지">마이페이지</a></div>
+      <div><h4>Account</h4><a href="#" data-auth="login">로그인</a><a href="#" data-auth="mypage">마이페이지</a></div>
     </div>
-    <div class="ft-bottom"><span>© Wave Local · 연성대학교 호텔관광과 김혜나 과제</span><span>모든 가격 · 수량 · 기사는 예시이며 실제 서비스가 아닙니다</span></div>
+    <div class="ft-bottom"><span>© Wave Local · 연성대학교 호텔관광과 김혜나 · <a href="#" id="privacyLink" style="display:inline;text-decoration:underline">개인정보처리방침</a></span><span>상품 · 가격 · 기사 속 일정은 예시예요 · 관광지 정보는 공개 관광 정보 기준</span></div>
   </div>
 </footer>
 
@@ -708,8 +726,8 @@
     <a href="#shop" data-close>가이드북 · 굿즈 숍 <span>04</span></a>
     <button class="dbtn" id="dCart">장바구니 <span id="dCartN">0</span></button>
     <div class="dlabel">Account</div>
-    <button class="dbtn demo" data-title="로그인">로그인 <span>→</span></button>
-    <button class="dbtn demo" data-title="마이페이지">마이페이지 <span>→</span></button>
+    <button class="dbtn" data-auth="login" id="dLoginBtn">로그인 <span>→</span></button>
+    <button class="dbtn" data-auth="mypage">마이페이지 <span>→</span></button>
   </div>
 </div>
 
@@ -721,8 +739,8 @@
   <div class="modal-box">
     <button class="modal-x" id="modalX" aria-label="닫기">×</button>
     <div class="k">Wave Local</div>
-    <h3 id="mTitle">데모 사이트 안내</h3>
-    <p id="mText">과제용 데모 사이트이므로<br>실제 로그인은 지원하지 않습니다.</p>
+    <h3 id="mTitle">안내</h3>
+    <p id="mText"></p>
     <button class="btn navy" id="modalOk">확인</button>
   </div>
 </div>
@@ -748,10 +766,123 @@
   const modal = $('#modal');
   const openModal = (title, html) => { $('#mTitle').textContent = title; $('#mText').innerHTML = html; modal.classList.add('open'); };
   const closeModal = () => modal.classList.remove('open');
-  $$('.demo').forEach(b => b.addEventListener('click', e => {
+  /* 로그인 · 마이페이지 (실제 기능은 아래 Firebase 스크립트가 연결) */
+  window.WLAuth = window.WLAuth || { enabled: false, user: null };
+  $$('[data-auth]').forEach(b => b.addEventListener('click', e => {
     e.preventDefault(); closeDrawer();
-    openModal(b.dataset.title + ' 안내', '과제용 데모 사이트이므로<br>실제 로그인은 지원하지 않습니다.');
+    if (WLAuth.user) openMyPage(); else openLogin(b.dataset.auth === 'mypage');
   }));
+
+  /* ---------- 로그인 · 회원가입 · 마이페이지 화면 ---------- */
+  const AUTH_ERR = {
+    'auth/invalid-email': '이메일 형식을 확인해 주세요.',
+    'auth/missing-password': '비밀번호를 입력해 주세요.',
+    'auth/weak-password': '비밀번호는 6자 이상으로 입력해 주세요.',
+    'auth/email-already-in-use': '이미 가입된 이메일이에요. 로그인해 주세요.',
+    'auth/invalid-credential': '이메일 또는 비밀번호가 맞지 않아요.',
+    'auth/user-not-found': '가입되지 않은 이메일이에요.',
+    'auth/wrong-password': '이메일 또는 비밀번호가 맞지 않아요.',
+    'auth/too-many-requests': '시도가 너무 많아요. 잠시 후 다시 시도해 주세요.',
+    'auth/popup-closed-by-user': 'Google 로그인 창이 닫혔어요.',
+    'auth/popup-blocked': '팝업이 차단됐어요. 브라우저에서 팝업을 허용해 주세요.',
+    'auth/unauthorized-domain': '이 주소는 아직 로그인 허용 도메인에 등록되지 않았어요.',
+    'auth/network-request-failed': '네트워크 연결을 확인해 주세요.'
+  };
+  const authMsg = e => AUTH_ERR[e && e.code] || '로그인 중 문제가 생겼어요. 잠시 후 다시 시도해 주세요.';
+  const PRIVACY = `<h4>수집하는 정보</h4><p>회원가입 · 로그인 시 이름(닉네임), 이메일 주소, (Google 로그인 시) 프로필 사진</p>
+    <h4>이용 목적</h4><p>회원 식별, 마이페이지 제공, 예약 요청 내역 보관</p>
+    <h4>보관 · 처리</h4><p>로그인 정보는 Google Firebase Authentication에서 처리돼요. 예약 요청 내역은 이용자의 브라우저에만 저장되며 서버로 전송되지 않아요.</p>
+    <h4>탈퇴 · 삭제</h4><p>마이페이지의 "회원 탈퇴"로 계정을 삭제할 수 있어요.</p>`;
+  function openPrivacy() { openSheet(`<div class="sheet-body"><div class="k">Wave Local</div><h3>개인정보처리방침</h3>${PRIVACY}<div class="sheet-actions"><button class="btn navy" data-sclose>확인</button></div></div>`); }
+  $('#privacyLink').addEventListener('click', e => { e.preventDefault(); openPrivacy(); });
+
+  function openLogin(fromMypage, mode = 'in') {
+    if (!WLAuth.enabled) {
+      openModal(fromMypage ? '마이페이지' : '로그인', '회원 서비스는 오픈 준비 중이에요.<br>조금만 기다려 주세요.'); return;
+    }
+    const up = mode === 'up';
+    openSheet(`<div class="sheet-body" style="max-width:460px;margin:0 auto">
+      <div class="k">Wave Local Membership</div><h3>${up ? '회원가입' : '로그인'}</h3>
+      ${fromMypage ? '<p style="margin:-6px 0 18px">마이페이지는 로그인 후 이용할 수 있어요.</p>' : ''}
+      <button class="auth-btn" id="gBtn"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.3 0-9.7-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google 계정으로 ${up ? '시작하기' : '로그인'}</button>
+      <div class="auth-or">또는 이메일로</div>
+      <form class="auth-form" id="authForm" novalidate>
+        ${up ? '<input type="text" id="aName" placeholder="이름 (닉네임)" maxlength="20" autocomplete="name">' : ''}
+        <input type="email" id="aEmail" placeholder="이메일" autocomplete="email" required>
+        <input type="password" id="aPw" placeholder="비밀번호 ${up ? '(6자 이상)' : ''}" autocomplete="${up ? 'new-password' : 'current-password'}" required>
+        ${up ? '<label class="check"><input type="checkbox" id="aAgree"><span>[필수] <a href="#" id="aPriv" style="text-decoration:underline">개인정보 수집 · 이용</a>에 동의합니다.</span></label>' : ''}
+        <div class="auth-err" id="aErr"></div>
+        <button class="btn navy" type="submit" id="aSubmit">${up ? '회원가입' : '로그인'}</button>
+        <div class="auth-links">${up ? '<span></span><button type="button" id="toIn">이미 회원이에요 · 로그인</button>' : '<button type="button" id="resetPw">비밀번호 찾기</button><button type="button" id="toUp">처음이에요 · 회원가입</button>'}</div>
+      </form>
+    </div>`);
+    const err = t => { $('#aErr').textContent = t; };
+    const busy = on => { $('#aSubmit').disabled = on; $('#gBtn').disabled = on; $('#aSubmit').style.opacity = on ? .6 : 1; };
+    $('#gBtn').onclick = async () => { err(''); busy(true); try { await WLAuth.google(); closeSheet(); showToast('<b>로그인했어요</b> · 반가워요!'); } catch (e) { err(authMsg(e)); } busy(false); };
+    $('#toUp') && ($('#toUp').onclick = () => openLogin(fromMypage, 'up'));
+    $('#toIn') && ($('#toIn').onclick = () => openLogin(fromMypage, 'in'));
+    $('#aPriv') && ($('#aPriv').onclick = e => { e.preventDefault(); openPrivacy(); });
+    $('#resetPw') && ($('#resetPw').onclick = async () => {
+      const em = $('#aEmail').value.trim();
+      if (!em) { err('비밀번호를 찾을 이메일을 먼저 입력해 주세요.'); return; }
+      try { await WLAuth.reset(em); err(''); $('#aErr').style.color = '#1f6f86'; $('#aErr').textContent = '비밀번호 재설정 메일을 보냈어요. 메일함을 확인해 주세요.'; } catch (e) { err(authMsg(e)); }
+    });
+    $('#authForm').onsubmit = async e => {
+      e.preventDefault(); err(''); $('#aErr').style.color = '';
+      const em = $('#aEmail').value.trim(), pw = $('#aPw').value;
+      if (up) {
+        const nm = $('#aName').value.trim();
+        if (nm.length < 2) { err('이름을 2자 이상 입력해 주세요.'); return; }
+        if (!$('#aAgree').checked) { err('개인정보 수집 · 이용에 동의해 주세요.'); return; }
+        busy(true);
+        try { await WLAuth.signUp(nm, em, pw); closeSheet(); showToast(`<b>${esc(nm)}</b>님, 가입을 환영해요!`); } catch (e2) { err(authMsg(e2)); }
+      } else {
+        busy(true);
+        try { await WLAuth.signIn(em, pw); closeSheet(); showToast('<b>로그인했어요</b> · 반가워요!'); } catch (e2) { err(authMsg(e2)); }
+      }
+      busy(false);
+    };
+  }
+
+  const reqKey = () => 'wl_requests_' + (WLAuth.user ? WLAuth.user.uid : 'guest');
+  const loadReqs = () => { try { return JSON.parse(localStorage.getItem(reqKey()) || '[]'); } catch (e) { return []; } };
+  const saveReq = r => { try { const a = loadReqs(); a.unshift(r); localStorage.setItem(reqKey(), JSON.stringify(a.slice(0, 20))); } catch (e) {} };
+
+  function openMyPage() {
+    const u = WLAuth.user; if (!u) { openLogin(true); return; }
+    const reqs = loadReqs();
+    const nm = u.displayName || u.email.split('@')[0];
+    openSheet(`<div class="sheet-body">
+      <div class="k">My Page</div><h3>마이페이지</h3>
+      <div class="me"><div class="av">${u.photoURL ? `<img src="${esc(u.photoURL)}" alt="">` : esc(nm[0])}</div>
+        <div><b>${esc(nm)}님</b><small>${esc(u.email || '')} · ${u.providerData[0] && u.providerData[0].providerId === 'google.com' ? 'Google 계정' : '이메일 계정'}</small></div></div>
+      <h4>예약 요청 내역 <small style="font-weight:300;color:var(--muted)">· 이 기기에 저장</small></h4>
+      ${reqs.length ? reqs.map(r => `<div class="req"><b>${esc(r.pass)} · ${esc(r.unit)}</b><span class="st">확정 전</span><small>이용일 ${esc(r.date)} · ${won(r.total)} · 요청 ${esc(r.at)}</small></div>`).join('')
+        : '<p class="empty" style="padding:20px 0">아직 예약 요청 내역이 없어요. <a href="#pass" data-sclose style="color:var(--gold);border-bottom:1px solid var(--gold)">로컬 패스 보러 가기</a></p>'}
+      <h4>장바구니</h4><p>담은 상품 <b>${cartCount()}</b>개 <button class="add" id="myCart" style="margin-left:10px">장바구니 보기</button></p>
+      <div class="sheet-actions">
+        <button class="btn line" id="logoutBtn">로그아웃</button>
+        <button class="btn line" id="delBtn" style="color:#b0473a;border-color:rgba(176,71,58,.4)">회원 탈퇴</button>
+      </div>
+      <div class="auth-err" id="myErr"></div>
+    </div>`);
+    $('#myCart').onclick = openCart;
+    $('#logoutBtn').onclick = async () => { await WLAuth.signOut(); closeSheet(); showToast('로그아웃했어요'); };
+    $('#delBtn').onclick = async () => {
+      if (!confirm('정말 탈퇴할까요? 계정과 이 기기의 예약 요청 내역이 삭제돼요.')) return;
+      const key = reqKey();
+      try { await WLAuth.deleteMe(); try { localStorage.removeItem(key); } catch (e) {} closeSheet(); showToast('탈퇴가 완료됐어요. 이용해 주셔서 감사해요.'); }
+      catch (e) { $('#myErr').textContent = e.code === 'auth/requires-recent-login' ? '보안을 위해 로그아웃 후 다시 로그인한 다음 탈퇴해 주세요.' : authMsg(e); }
+    };
+  }
+
+  /* 로그인 상태가 바뀌면 상단 버튼 이름을 바꿈 */
+  window.onAuthUser = u => {
+    const label = u ? `${(u.displayName || u.email.split('@')[0])}님` : '로그인';
+    $('#loginBtn').textContent = label;
+    $('#dLoginBtn').innerHTML = `${esc(label)} <span>→</span>`;
+  };
+
   $('#modalX').onclick = closeModal; $('#modalOk').onclick = closeModal;
   modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
 
@@ -852,7 +983,7 @@
   }
   function addToCart(id, q = 1) {
     cart[id] = Math.min(10, (cart[id] || 0) + q); syncCart();
-    showToast(`<b>${PRODUCTS[id].name}</b> ${q}개를 장바구니에 담았어요 · 데모`);
+    showToast(`<b>${PRODUCTS[id].name}</b> ${q}개를 장바구니에 담았어요`);
   }
   $$('.add').forEach(b => b.addEventListener('click', () => {
     addToCart(b.dataset.id, 1);
@@ -872,7 +1003,7 @@
         + `<div class="cart-total"><span>합계 (예시)</span><b class="num">${won(total)}</b></div>`
         : `<div class="empty">장바구니가 비어 있어요.<br><a href="#shop" data-sclose style="color:var(--gold);border-bottom:1px solid var(--gold)">숍 둘러보기 →</a></div>`}
       <div class="sheet-actions">${ids.length ? '<button class="btn navy" id="orderBtn">주문하기</button>' : ''}<button class="btn line" data-sclose>계속 둘러보기</button></div>
-      <div class="notice-box" id="cartNote">과제용 데모 사이트라 실제 주문과 결제는 진행되지 않아요.</div>
+      <div class="notice-box" id="cartNote">온라인 주문 · 결제는 오픈 준비 중이에요. 지금은 주문이 접수되지 않아요.</div>
     </div>`;
   }
   function openCart() {
@@ -886,7 +1017,7 @@
         if (act === 'del') delete cart[id];
         syncCart(); sheetC.innerHTML = renderCart(); return;
       }
-      if (e.target.id === 'orderBtn') $('#cartNote').innerHTML = '<b>주문이 진행되지 않았어요.</b> 과제용 데모 사이트라 실제 주문·결제 기능이 없어요.';
+      if (e.target.id === 'orderBtn') $('#cartNote').innerHTML = '<b>주문이 접수되지 않았어요.</b> 온라인 주문 · 결제는 오픈 준비 중이에요.';
     };
   }
   $('#cartBtn').addEventListener('click', openCart);
@@ -929,6 +1060,7 @@
     $('#toStep2').onclick = step2;
   }
   function step2() {
+    if (!guest.name && WLAuth.user && WLAuth.user.displayName) guest.name = WLAuth.user.displayName;
     sheetC.innerHTML = `<div class="sheet-body"><div class="k">Signature Local Pass</div><h3>예약자 정보</h3>${stepsBar(2)}
       <div class="fgrid">
         <div class="f"><label for="gName">예약자 이름</label><input type="text" id="gName" maxlength="20" autocomplete="name" value="${esc(guest.name)}" placeholder="예) 김소담"><span class="err" id="eName"></span></div>
@@ -936,7 +1068,7 @@
         <div class="f full"><label>이용 인원 확인</label>
           <label class="check"><input type="checkbox" id="gPeople"><span>이용 인원이 <b>${unit()}</b>이 맞습니다. (${passName}, ${bkDate.value})</span></label>
           <span class="err" id="ePeople"></span></div>
-        <div class="f full"><label class="check"><input type="checkbox" id="gDemo"><span>과제용 데모 사이트라 실제 예약·결제가 되지 않고, 입력한 정보가 저장·전송되지 않는다는 것을 확인했습니다.</span></label><span class="err" id="eDemo"></span></div>
+        <div class="f full"><label class="check"><input type="checkbox" id="gDemo"><span>온라인 예약 · 결제는 오픈 준비 중이라 지금은 예약이 확정되지 않는다는 것을 확인했습니다.</span></label><span class="err" id="eDemo"></span></div>
       </div>
       <div class="sheet-actions"><button class="btn navy" id="toStep3">다음 · 요청 내용 확인 →</button><button class="btn line" id="back1">이전</button></div></div>`;
     const ph = $('#gPhone');
@@ -955,16 +1087,17 @@
       $('#eName').textContent = ok.name ? '' : '이름을 2자 이상 입력해 주세요 (한글·영문).';
       $('#ePhone').textContent = ok.phone ? '' : '휴대폰 번호를 010-0000-0000 형식으로 입력해 주세요.';
       $('#ePeople').textContent = ok.people ? '' : '이용 인원을 확인해 주세요.';
-      $('#eDemo').textContent = ok.demo ? '' : '데모 안내를 확인해 주세요.';
+      $('#eDemo').textContent = ok.demo ? '' : '안내를 확인해 주세요.';
       if (Object.values(ok).every(Boolean)) { guest = { name, phone }; step3(); }
     };
   }
   function step3() {
+    if (WLAuth.user) saveReq({ pass: passName, unit: unit(), date: bkDate.value, total: price * qty, at: new Date().toLocaleDateString('ko-KR') });
     const masked = guest.phone.replace(/-(\d{3,4})-/, (m, a) => '-' + '*'.repeat(a.length) + '-');
     sheetC.innerHTML = `<div class="sheet-body"><div class="k">Signature Local Pass</div><h3>예약 요청 내용 확인</h3>${stepsBar(3)}
       ${summary()}
       <dl class="info" style="border-top:none"><div><dt>예약자</dt><dd>${esc(guest.name)}</dd></div><div><dt>연락처</dt><dd>${masked}</dd></div><div><dt>인원</dt><dd>${people()}명 확인함</dd></div></dl>
-      <div class="notice-box"><b>예약과 결제는 진행되지 않았어요.</b><br>과제용 데모 사이트라 실제 예약 접수·결제 기능이 없으며, 입력한 정보는 저장되거나 전송되지 않아요. 창을 닫으면 사라져요.</div>
+      <div class="notice-box">${WLAuth.user ? '<b>마이페이지 · 예약 요청 내역에 저장했어요.</b><br>' : ''}<b>예약 확정과 결제는 아직 진행되지 않았어요.</b> 온라인 예약은 오픈 준비 중이에요.${WLAuth.user ? '' : ' 로그인하면 요청 내역을 마이페이지에 보관할 수 있어요.'}</div>
       <div class="sheet-actions"><button class="btn line" id="back2">정보 수정</button><button class="btn navy" id="doneBtn">확인하고 닫기</button></div></div>`;
     $('#back2').onclick = step2;
     $('#doneBtn').onclick = () => { guest = { name: '', phone: '' }; closeSheet(); };
@@ -974,8 +1107,42 @@
   /* ---------- 뉴스레터 ---------- */
   $('#newsForm').addEventListener('submit', e => {
     e.preventDefault(); e.target.reset();
-    $('#newsMsg').textContent = '구독 신청 화면만 보여 드리는 데모예요. 실제로 메일이 등록·발송되지 않아요.';
+    $('#newsMsg').textContent = '뉴스레터는 오픈 준비 중이라 아직 신청이 접수되지 않았어요. 오픈하면 이 페이지에서 알려 드릴게요.';
   });
+</script>
+
+<!-- =========================================================
+     실제 로그인 (Firebase Authentication · Google / 이메일)
+     ▶ 아래 FIREBASE_CONFIG에 내 Firebase 프로젝트 값을 붙여 넣으면 바로 작동해요.
+       값이 비어 있으면 "회원 서비스 오픈 준비 중" 안내만 보여요.
+     ========================================================= -->
+<script type="module">
+  const FIREBASE_CONFIG = {
+    apiKey: "AIzaSyAAuQY75mE-1zdUmeIYfbA929JfLxIW6F0",
+    authDomain: "wave-local-96960.firebaseapp.com",
+    projectId: "wave-local-96960",
+    storageBucket: "wave-local-96960.firebasestorage.app",
+    messagingSenderId: "792269894121",
+    appId: "1:792269894121:web:a0021d06c243a1ba809b78"
+  };
+  if (FIREBASE_CONFIG.apiKey) {
+    const V = '13.2.0';
+    const { initializeApp } = await import(`https://www.gstatic.com/firebasejs/${V}/firebase-app.js`);
+    const A = await import(`https://www.gstatic.com/firebasejs/${V}/firebase-auth.js`);
+    const app = initializeApp(FIREBASE_CONFIG);
+    const auth = A.getAuth(app);
+    auth.languageCode = 'ko';
+    window.WLAuth = {
+      enabled: true, user: null,
+      google: () => A.signInWithPopup(auth, new A.GoogleAuthProvider()),
+      signIn: (e, p) => A.signInWithEmailAndPassword(auth, e, p),
+      signUp: async (n, e, p) => { const c = await A.createUserWithEmailAndPassword(auth, e, p); await A.updateProfile(c.user, { displayName: n }); window.WLAuth.user = auth.currentUser; window.onAuthUser && window.onAuthUser(auth.currentUser); return c; },
+      reset: e => A.sendPasswordResetEmail(auth, e),
+      signOut: () => A.signOut(auth),
+      deleteMe: () => A.deleteUser(auth.currentUser)
+    };
+    A.onAuthStateChanged(auth, u => { window.WLAuth.user = u; window.onAuthUser && window.onAuthUser(u); });
+  }
 </script>
 </body>
 </html>
